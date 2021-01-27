@@ -1,7 +1,7 @@
 import path from "path";
 import fs, {promises as fsPromise} from "fs";
 import matter from "gray-matter";
-import {Post} from "./entity";
+import {Post} from "./entity-fs";
 
 const markdownDir = path.join(process.cwd(), 'markdown');
 

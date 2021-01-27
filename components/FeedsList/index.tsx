@@ -1,6 +1,6 @@
 
 import { Feed } from "components/Feed";
-import { Post } from "../../lib/entity";
+import { Post } from "../../lib/entity-fs";
 
 type Props = {
     posts: Post[]

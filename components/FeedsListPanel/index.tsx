@@ -1,7 +1,7 @@
 import {NextPage} from "next";
 import axios from "axios";
 import {useEffect, useState} from "react";
-import { Post } from "lib/entity";
+import { Post } from "lib/entity-fs";
 import { FeedsList } from "components/FeedsList";
 
 export function FeedsListPanel()  {

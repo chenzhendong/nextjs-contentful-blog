@@ -1,7 +1,7 @@
 import { PostPage } from 'components/PostPage';
 import { GetServerSideProps } from 'next'
 import {getPost} from "../../lib/data-fs"
-import {Post} from "../../lib/entity"
+import {Post} from "../../lib/entity-fs"
 
 type Props = {
     post: string

@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import { Post } from "../../lib/entity";
+import { Post } from "../../lib/entity-fs";
 
 type Props = {
     key: string,
