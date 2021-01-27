@@ -5,23 +5,28 @@ const client = createClient({
     accessToken: process.env.CONTENTFUL_TOKEN as string
 });
 
-export async function getBlogPosts() {
-    const bps = await client.getEntries({
+export async function getBlogPost(slug: string) {
+    const bp = await client.getEntries({
         content_type: "blogPost",
-        order: '-fields.publishDate'
-    });
-    if(bps.items) {
-        return bps.items;
-    }
-    return undefined;
+        "fields.slug": slug
+    })
+    return bp.items[0];
 }
 
-export async function getBlogPostsByCategory(categoryName: string) {
-    const bps = await client.getEntries({
-        content_type: "blogPost",
-        'fields.tags': categoryName,
-        order: '-fields.publishDate'
-    });
+export async function getBlogPosts(categoryName: string) {
+    let bps = undefined;
+    if(categoryName){
+        bps = await client.getEntries({
+            content_type: "blogPost",
+            order: '-fields.publishDate'
+        });
+    } else {
+        bps = await client.getEntries({
+            content_type: "blogPost",
+            'fields.tags': categoryName,
+            order: '-fields.publishDate'
+        });
+    }
     if(bps.items) {
         return bps.items;
     }
@@ -38,22 +43,32 @@ export async function getCategories() {
     return [] as Array<string>;
 }
 
-export async function getPerson() {
-    const p = await client.getEntries({content_type: "person"});
-    if(p.items) {
-        return p.items[0];
+export async function getPerson(personName?: string) {
+    let ps = undefined
+    if(personName){
+        ps = await client.getEntries({
+            content_type: "person",
+            'fields.name': personName,
+        });
+    } else {
+        ps = await client.getEntries({
+            content_type: "person"
+        });        
+    }
+    if(ps.items) {
+        return ps.items[0];
     }
     return undefined;
 }
 
 
-(async () => {
-    try{
-        const bps = await getBlogPostsByCategory("General");
-        if(bps) {
-            console.log(bps[0])
-        }
-    } catch (e) {
-        console.log(e)
-    }
-})();
+// (async () => {
+//     try{
+//         const bps = await getBlogPosts("General");
+//         if(bps) {
+//             console.log(bps[0])
+//         }
+//     } catch (e) {
+//         console.log(e)
+//     }
+// })();

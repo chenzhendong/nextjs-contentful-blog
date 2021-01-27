@@ -1,13 +1,10 @@
-import {NextApiHandler} from 'next';
-import {getPosts} from 'lib/data-fs';
+import { getBlogPosts } from 'lib/data-contentful';
 
 
-const Posts: NextApiHandler = async (req, res) => {
-  const posts = await getPosts();
+export default async function handler (req: any, res: any) {
+  const bps = await getBlogPosts(req.query.category as string);  
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
-  res.write(JSON.stringify(posts));
+  res.write(JSON.stringify(bps));
   res.end();
 };
-
-export default Posts;

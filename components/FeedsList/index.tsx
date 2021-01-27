@@ -1,18 +1,15 @@
 
 import { Feed } from "components/Feed";
-import { Post } from "../../lib/entity-fs";
 
-type Props = {
-    posts: Post[]
-  }
-
-export function FeedsList( props: Props ) {
-    const posts:Post[] = props.posts;
+export function FeedsList( props: any ) {
+    const posts:any[] = props.posts;
     return (
         <div className="container">
             <div>
                 {
-                    posts.map(p => <Feed key={p.meta.id} post={p} />)
+                    posts.map( 
+                        p => <Feed slug={p.fields.slug as string} post={p as any} />
+                    )
                 }
             </div>
             <div className="level container category-style is-size-3 m-4">

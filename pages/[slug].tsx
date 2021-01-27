@@ -1,7 +1,6 @@
 import { PostPage } from 'components/PostPage';
+import { getBlogPost } from 'lib/data-contentful';
 import { GetServerSideProps } from 'next'
-import {getPost} from "../../lib/data-fs"
-import {Post} from "../../lib/entity-fs"
 
 type Props = {
     post: string
@@ -17,8 +16,8 @@ function Blog ( props: Props) {
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-    const {query} = ctx;    
-    const post = getPost(query.blog+".md");    
+    const {query} = ctx;
+    const post = await getBlogPost(query.slug as string);  
     return { props: {post: JSON.stringify(post)} };
 }
   
