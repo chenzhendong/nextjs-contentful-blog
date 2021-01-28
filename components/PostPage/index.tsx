@@ -22,7 +22,7 @@ export function PostPage(prop:any){
             <div className="Level m-2">
                 <div className="level-left">
                     <div className="button is-rounded category-style"> 
-                        <Link href="/">All Articles</Link>  
+                        <Link href="/"><a>All Articles</a></Link>  
                     </div>
                 </div>
             </div>

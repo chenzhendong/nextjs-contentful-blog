@@ -18,7 +18,7 @@ function Blog ( props: Props) {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const {query} = ctx;
     const post = await getBlogPost(query.slug as string);  
-    return { props: {post: JSON.stringify(post)} };
+    return { props: {post: post} };
 }
   
 export default Blog;

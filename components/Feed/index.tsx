@@ -19,7 +19,7 @@ export function Feed( props: Props ) {
             </div>
             <div className="divider"></div>
             <div className="content mt-3">{post.fields.description + " ..."}</div>
-            <div className="foot"><Link as={"/"+ post.fields.slug} href="[slug]"><a>Read More</a></Link></div>
+            <div className="foot"><Link as={`/blog/${post.fields.slug}`} href="/blog/[slug]"><a>Read More</a></Link></div>
         </div>
     );
 };

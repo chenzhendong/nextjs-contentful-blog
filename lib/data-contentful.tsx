@@ -10,7 +10,7 @@ export async function getBlogPost(slug: string) {
         content_type: "blogPost",
         "fields.slug": slug
     })
-    return bp.items[0];
+    return JSON.stringify(bp.items[0]);
 }
 
 export async function getBlogPosts(categoryName: string) {
@@ -28,7 +28,7 @@ export async function getBlogPosts(categoryName: string) {
         });
     }
     if(bps.items) {
-        return bps.items;
+        return JSON.stringify(bps.items);
     }
     return undefined;
 }
@@ -36,11 +36,11 @@ export async function getBlogPosts(categoryName: string) {
 export async function getCategories() {
     const t = await client.getContentType('blogPost')
     for ( const f of t.fields) {
-        if ( f.name === "Tags") {
-            return f.items?.validations[0].in as Array<string>;
+        if ( f.name === "Tags" && f.items && f.items.validations) {
+            return JSON.stringify(f.items?.validations[0].in as Array<string>);
         }
     }
-    return [] as Array<string>;
+    return "[]";
 }
 
 export async function getPerson(personName?: string) {
@@ -56,9 +56,16 @@ export async function getPerson(personName?: string) {
         });        
     }
     if(ps.items) {
-        return ps.items[0];
+        return JSON.stringify(ps.items[0]);
     }
     return undefined;
+}
+
+export async function getPeople() {
+    let ps = await client.getEntries({
+        content_type: "person"
+    });
+    return JSON.stringify(ps.items);
 }
 
 
