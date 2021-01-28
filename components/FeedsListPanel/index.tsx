@@ -1,26 +1,30 @@
-import {NextPage} from "next";
-import axios from "axios";
-import {useEffect, useState} from "react";
-import { Post } from "lib/entity-fs";
-import { FeedsList } from "components/FeedsList";
+import useSWR from "swr";
+import { Feed } from "components/Feed";
+
+const fetcher = (...args: Parameters<typeof fetch>) =>  fetch(...args).then(response => response.json());
 
 export function FeedsListPanel()  {
-    const [posts, setPosts] = useState<Post[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
-    useEffect(() => {
-        setIsLoading(true);
-        axios.get("/api/posts").then(response => {
-          setPosts(response.data);
-          setIsLoading(false);
-        }, () => {
-            setIsLoading(true);
-        })
-    }, []);
+    const {data:posts, error} = useSWR("/api/posts", fetcher); 
+
     return (    
         <div className="container">   
-            {isLoading ? 
-                (<div> Loading ... </div>) :   
-                <FeedsList posts={ posts } />
+            {
+                posts ? (  
+                    <div className="container"> 
+                        <div>
+                            {
+                                posts.map( 
+                                    (p:any) => <Feed slug={p.fields.slug as string} post={p as any} />
+                                )
+                            }
+                        </div>
+                        <div className="level container category-style is-size-3 m-4">
+                            <div className="level-left">Prev</div>
+                            <div className="level-right">Next</div>
+                        </div>  
+                    </div>
+                )
+                : (<div> Loading ... </div>)
             }
         </div>
     )

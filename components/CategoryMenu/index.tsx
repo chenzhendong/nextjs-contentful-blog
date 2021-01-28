@@ -1,9 +1,6 @@
-type Props = {
-    categories: string
-}
+import useSWR from "swr";
 
 type StringMap = {[k: string]: any}
-
 function buildCategoryMap(cl: Array<string>) {
     let cmap = {} as StringMap;    
     for(const c of cl) {
@@ -19,17 +16,25 @@ function buildCategoryMap(cl: Array<string>) {
     return cmap;
 }
 
-export function CategoryMenu(props: Props) {
-    const cl = JSON.parse(props.categories);    
-    cl.sort();
+const fetcher = (...args: Parameters<typeof fetch>) =>  fetch(...args).then(response => response.json());
+
+export function CategoryMenu() {
+    const {data: cl, error} = useSWR("/api/category", fetcher);   
+    let categories = cl as Array<string>;
+    
     return (
         <div>
             <div>Category</div>
             <div className="ml-3 category-style">
                 { 
-                    cl.map(
-                        (c: string) => <div key={c}>{c}</div>
-                    )                
+                    (categories) ? (
+                        categories.map(
+                            (c: string) => <div key={c}>{c}</div>
+                        )   
+                    ):
+                    (
+                        <div className="category-style">Loading ...</div>
+                    )             
                 }                
             </div>
         </div>

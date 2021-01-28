@@ -43,12 +43,12 @@ export async function getCategories() {
     return "[]";
 }
 
-export async function getPerson(personName?: string) {
+export async function getPerson(id?: string) {
     let ps = undefined
-    if(personName){
+    if(id){
         ps = await client.getEntries({
             content_type: "person",
-            'fields.name': personName,
+            'sys.id': id,
         });
     } else {
         ps = await client.getEntries({
