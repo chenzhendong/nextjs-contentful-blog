@@ -5,18 +5,18 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 let store: any = undefined
 
 const initialState = {
-    page: 0,
-    pageSize: 2,
-    category: ""  
+  page: 0,
+  pageSize: 2,
+  category: ''
 }
 
 const reducer = (state = initialState, action: any) => {
   switch (action.type) {
     case 'PREV_PAGE':
-        return {
-          ...state,
-          page: state.page - 1
-        }
+      return {
+        ...state,
+        page: state.page - 1
+      }
     case 'NEXT_PAGE':
       return {
         ...state,
@@ -26,7 +26,7 @@ const reducer = (state = initialState, action: any) => {
       return {
         ...state,
         category: action.payload
-      }    
+      }
     default:
       return state
   }

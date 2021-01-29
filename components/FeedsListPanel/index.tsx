@@ -1,5 +1,5 @@
-import useSWR from "swr";
-import { Feed } from "components/Feed";
+import useSWR from 'swr';
+import { Feed } from 'components/Feed';
 import { useSelector, useDispatch } from 'react-redux'
 
 const fetcher = (...args: Parameters<typeof fetch>) =>  fetch(...args).then(response => response.json());
@@ -9,10 +9,10 @@ export function FeedsListPanel(props: any)  {
     const page: number = useSelector((state: any) => state.page)
     const pageSize: number = useSelector((state: any) => state.pageSize)
     const dispatch = useDispatch()
-    const {data:posts, error} = useSWR("/api/posts?"
-        + "category="+ category
-        + "&skip=" + page*pageSize 
-        + "&limit=" + pageSize, fetcher); 
+    const {data:posts, error} = useSWR('/api/posts?'
+        + 'category='+ category
+        + '&skip=' + page*pageSize 
+        + '&limit=' + pageSize, fetcher); 
 
     const prevPage = () =>
         dispatch({

@@ -1,4 +1,4 @@
-export function PageHeader(props: any){
+export function PageHeader(props: any) {
     return (
         <div></div>
     )

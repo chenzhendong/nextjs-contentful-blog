@@ -1,4 +1,4 @@
-export function HomeLayout(props:any) {
+export function HomeLayout(props: any) {
     return (
         <div className="box m-4 p-6">
             <div className="tile is-ancestor">
