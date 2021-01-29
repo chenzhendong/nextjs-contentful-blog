@@ -13,24 +13,21 @@ export async function getBlogPost(slug: string) {
     return JSON.stringify(bp.items[0]);
 }
 
-export async function getBlogPosts(categoryName: string) {
+export async function getBlogPosts(categoryName: string, skip: number, limit: number) {
     let bps = undefined;
-    if(!categoryName){
-        bps = await client.getEntries({
-            content_type: "blogPost",
-            select: "fields.slug,fields.title,fields.tags,fields.description,fields.publishDate",
-            order: '-fields.publishDate'
-        });
-    } else {
-        bps = await client.getEntries({
-            content_type: "blogPost",
-            select: "fields.slug,sys.id,fields.title,fields.tags,fields.description,fields.publishDate",
-            "fields.tags": categoryName,
-            order: '-fields.publishDate'
-        });
+    let config = {
+        skip: skip?skip:0,
+        limit: limit?limit:2,
+        content_type: "blogPost",
+        select: "fields.slug,fields.title,fields.tags,fields.description,fields.publishDate",
+        order: '-fields.publishDate'
+    } as {[key: string]: any};
+    if(categoryName){
+        config["fields.tags"] = categoryName;       
     }
-    if(bps.items) {
-        return JSON.stringify(bps.items);
+    bps = await client.getEntries(config);
+    if(bps) {
+        return JSON.stringify(bps);
     }
     return undefined;
 }

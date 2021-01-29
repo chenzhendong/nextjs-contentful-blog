@@ -7,11 +7,8 @@ import { useState } from 'react';
 
 export default function Home()  { 
   const [category, setCategory] = useState("")
-  function handleCategoryChange(category:string) {
-      setCategory(category);
-  }
-  
-  const categoryMenu = <CategoryMenu onCategoryChange={handleCategoryChange}/>
+   
+  const categoryMenu = <CategoryMenu />
   const profilePanel = <ProfilePanel />
   const feedListPanel = <FeedsListPanel category={category}/>
   const sidePanel = <SidePanel up={profilePanel} down={categoryMenu}/>

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import useSWR from "swr";
+import { useSelector, useDispatch } from 'react-redux'
 
 const fetcher = (...args: Parameters<typeof fetch>) =>  fetch(...args).then(response => response.json());
 function lastElement(c: string){
@@ -8,20 +8,24 @@ function lastElement(c: string){
 }
 
 export function CategoryMenu(props: any) {
+    const category = useSelector((state: any) => state.category)
+    const dispatch = useDispatch()
     const {data: cl, error} = useSWR("/api/category", fetcher);   
     let categories = cl as Array<string>;
-    const [category, setCategory] = useState("");
-    useEffect(() =>{
-        props.onCategoryChange(category);
-    })
+    const setCategory = (category: string) => {
+        dispatch({
+            type: 'CHANGE_CATEGORY',
+            payload: category
+        })
+    }
     
     return (
         <div>
             <div 
                 className = {(!category)?"has-text-underline":""}
                 onClick={() => setCategory("")}
-            >Category</div>
-            <div className="ml-3 category-style">
+            ><a className="has-text-black has-text-weight-bold">Category</a></div>
+            <div className="ml-3">
                 { 
                     (categories) ? (
                         categories.sort().map(
@@ -30,7 +34,7 @@ export function CategoryMenu(props: any) {
                                 className = {((c===category)?"has-text-underline":"" ) + " pl-"+((c.split("|").length-1)*2)}
                                 onClick={() => setCategory(c)}
                             >
-                                {lastElement(c)}
+                                <a className="category-style">{lastElement(c)}</a>
                             </div>
                         )   
                     ):
