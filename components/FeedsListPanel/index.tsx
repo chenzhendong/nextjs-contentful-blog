@@ -4,7 +4,7 @@ import { Feed } from "components/Feed";
 const fetcher = (...args: Parameters<typeof fetch>) =>  fetch(...args).then(response => response.json());
 
 export function FeedsListPanel(props: any)  {
-    const {data:posts, error} = useSWR("/api/posts", fetcher); 
+    const {data:posts, error} = useSWR("/api/posts?category="+props.category, fetcher); 
 
     return (    
         <div className="container">   

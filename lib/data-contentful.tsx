@@ -15,15 +15,17 @@ export async function getBlogPost(slug: string) {
 
 export async function getBlogPosts(categoryName: string) {
     let bps = undefined;
-    if(categoryName){
+    if(!categoryName){
         bps = await client.getEntries({
             content_type: "blogPost",
+            select: "fields.slug,fields.title,fields.tags,fields.description,fields.publishDate",
             order: '-fields.publishDate'
         });
     } else {
         bps = await client.getEntries({
             content_type: "blogPost",
-            'fields.tags': categoryName,
+            select: "fields.slug,sys.id,fields.title,fields.tags,fields.description,fields.publishDate",
+            "fields.tags": categoryName,
             order: '-fields.publishDate'
         });
     }

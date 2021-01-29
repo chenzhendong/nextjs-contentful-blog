@@ -7,7 +7,6 @@ export function SidePanel(props: any) {
             {props.up}
             <div className="box mt-6">
                 {props.down}
-                <div className="">About me</div>
             </div>           
         </div>
     );
