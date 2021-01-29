@@ -18,7 +18,7 @@ function buildCategoryMap(cl: Array<string>) {
 
 const fetcher = (...args: Parameters<typeof fetch>) =>  fetch(...args).then(response => response.json());
 
-export function CategoryMenu() {
+export function CategoryMenu(props: any) {
     const {data: cl, error} = useSWR("/api/category", fetcher);   
     let categories = cl as Array<string>;
     

@@ -2,7 +2,7 @@ import useSWR from "swr";
 
 const fetcher = (...args: Parameters<typeof fetch>) =>  fetch(...args).then(response => response.json());
 
-export function ProfilePanel() {
+export function ProfilePanel(props: any) {
     const {data: person, error} = useSWR("/api/person", fetcher);
     
     return (
@@ -22,7 +22,7 @@ export function ProfilePanel() {
                     </div>   
                  ) : (
                     <div className="container">
-                        <div className="category-style"> Loadding ... </div>
+                        <div className="category-style"> Loading ... </div>
                     </div>
                  )
             }                     

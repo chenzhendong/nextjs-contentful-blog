@@ -1,12 +1,8 @@
 
 import Link from "next/link";
 import { formatDate } from "lib/format"
-type Props = {
-    slug: string,
-    post: any
-}
 
-export function Feed( props: Props ) {
+export function Feed( props: any ) {
     const post = props.post;    
     return (
         <div className="box">

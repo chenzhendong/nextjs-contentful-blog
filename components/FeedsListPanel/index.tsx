@@ -3,7 +3,7 @@ import { Feed } from "components/Feed";
 
 const fetcher = (...args: Parameters<typeof fetch>) =>  fetch(...args).then(response => response.json());
 
-export function FeedsListPanel()  {
+export function FeedsListPanel(props: any)  {
     const {data:posts, error} = useSWR("/api/posts", fetcher); 
 
     return (    
@@ -18,7 +18,7 @@ export function FeedsListPanel()  {
                                 )
                             }
                         </div>
-                        <div className="level container category-style is-size-3 m-4">
+                        <div className="level container category-style is-size-5 m-4">
                             <div className="level-left">Prev</div>
                             <div className="level-right">Next</div>
                         </div>  

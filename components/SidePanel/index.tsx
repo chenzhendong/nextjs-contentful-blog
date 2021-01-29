@@ -1,12 +1,12 @@
 import {CategoryMenu} from "components/CategoryMenu"
 import {ProfilePanel} from "components/ProfilePanel"
 
-export function SidePanel() { 
+export function SidePanel(props: any) { 
     return (
         <div className="container">
-            <ProfilePanel />
+            {props.up}
             <div className="box mt-6">
-                <CategoryMenu />
+                {props.down}
                 <div className="">About me</div>
             </div>           
         </div>
