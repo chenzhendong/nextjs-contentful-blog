@@ -5,6 +5,7 @@ import Tex from '@matejmazur/react-katex';
 import math from 'remark-math';
 import 'katex/dist/katex.min.css';
 import { formatDate } from 'lib/format'
+import { useRouter } from 'next/dist/client/router';
 
 const renderers = {
     code: ({ language, value }: { language: any, value: any }) => {
@@ -16,13 +17,14 @@ const renderers = {
 
 export function PostPage(prop: any) {
     const { post } = prop;
+    const router = useRouter()
 
     return (
         <div className="box m-6">
             <div className="Level m-2">
                 <div className="level-left">
-                    <div className="button is-rounded category-style">
-                        <Link href="/"><a>All Articles</a></Link>
+                    <div className="button is-rounded" onClick={() => router.push('/')}>
+                        <span className="category-style">All Articles</span>
                     </div>
                 </div>
             </div>

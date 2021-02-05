@@ -22,19 +22,23 @@ export function CategoryMenu(props: any) {
     return (
         <div>
             <div
-                className={(!category) ? 'has-text-underline' : ''}
+                className={((!category) ? '' : 'is-outlined ') + "button is-info is-small is-rounded"}
                 onClick={() => setCategory("")}
-            ><a className="has-text-black has-text-weight-bold">Category</a></div>
+            >All Articles</div>
             <div className="ml-3">
                 {
                     (categories) ? (
                         categories.sort().map(
                             (c: string) =>
-                                <div key={c}
-                                    className={((c === category) ? 'has-text-underline' : '') + ' pl-' + ((c.split('|').length - 1) * 2)}
-                                    onClick={() => setCategory(c)}
-                                >
-                                    <a className="category-style">{lastElement(c)}</a>
+                                <div>
+                                    <div key={c}
+                                        className={((c === category) ? '' : 'is-outlined ') 
+                                        + 'button is-info is-small is-rounded mt-3 ml-' 
+                                        + ((c.split('|').length - 1) * 3)}
+                                        onClick={() => setCategory(c)}
+                                    >
+                                        {lastElement(c)}
+                                    </div>
                                 </div>
                         )
                     ) :

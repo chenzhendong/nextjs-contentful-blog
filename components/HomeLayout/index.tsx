@@ -1,6 +1,6 @@
 export function HomeLayout(props: any) {
     return (
-        <div className="box m-4 p-6">
+        <div className="box m-4 p-6 has-background-light">
             <div className="tile is-ancestor">
                 <div className="tile is-3">{props.left}</div>
                 <div className="divider is-vertical"></div>
