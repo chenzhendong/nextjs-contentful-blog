@@ -21,7 +21,7 @@ export function PostPage(prop: any) {
 
     return (
         <div className="box m-6">
-            <div className="Level m-2">
+            <div className="level m-2">
                 <div className="level-left">
                     <div className="button is-rounded" onClick={() => router.push('/')}>
                         <span className="category-style">All Articles</span>
@@ -29,9 +29,11 @@ export function PostPage(prop: any) {
                 </div>
             </div>
             <div className="m-6">
-                <div className="container title is-3">{post.fields.title}</div>
-                <div className="has-text-muted">{formatDate(post.fields.publishDate)}</div>
-                <div className="content mt-4">
+                <div className="container has-text-centered">
+                    <div className="title is-3">{post.fields.title}</div>
+                    <div className="has-text-muted">{formatDate(post.fields.publishDate)}</div>
+                </div>
+                <div className="content mt-6">
                     <ReactMarkdown plugins={[math]}
                         renderers={renderers}
                         children={post.fields.body} />
